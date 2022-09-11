@@ -1,4 +1,4 @@
-package com.udemy;
+package com.udemy.comparator;
 
 import org.junit.Test;
 
@@ -9,15 +9,15 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class Problem01Test {
+public class Comparator01Test {
 
     @Test
     public void shouldReturnOrderHighestToLowest() {
         List<String> names = Arrays.asList("Juan", "Antonia", "Pedro");
 
         /*
-          Asignar en la variable lengthComparator un comparador que ordene los strings
-          según la longitud de MAYOR a MENOR (contrario a lo planteado en el problema original).
+         * Asignar en la variable lengthComparator un comparador que ordene los strings
+         *   según la longitud de MAYOR a MENOR (contrario a lo planteado en el problema original).
          */
         Comparator<String> lengthComparator = (o1, o2) -> o2.length() - o1.length();
 
