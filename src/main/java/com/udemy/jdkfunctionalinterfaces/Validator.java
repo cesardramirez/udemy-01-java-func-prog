@@ -2,6 +2,7 @@ package com.udemy.jdkfunctionalinterfaces;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /*
  * La clase Validator es determinar qué objetos del tipo T cumplen determinados requisitos.
@@ -19,15 +20,20 @@ import java.util.List;
  */
 public class Validator<T> {
 
-    // TODO : Definir el tipo de la List.
-    List validators = new ArrayList<>();
+    // Se define el tipo de la lista como Predicate ya que este guardará el resultado boleano de una condición.
+    // Se coloca una T porque el dominio de la función puede ser cualquier cosa.
+    List<Predicate<T>> validators = new ArrayList<>();
 
-    public boolean validate(Object value) {  // TODO : Cambiar Object a un tipo más adecuado.
-        return true;  // TODO : Retorna true si pasa todas las validaciones, sino false.
+    public boolean validate(T value) {  // T: Dominio de una función.
+        for (Predicate<T> validator : validators) {
+            if(!validator.test(value)) {  // Método test() de la Interfaz Funcional Predicate.
+                return false;  // Apenas encuentre una validación que no cumple, retorna false y se sale del ciclo.
+            }
+        }
+        return true;  // Retorna true si pasa todas las validaciones.
     }
 
-    // TODO : Implementar método para agregar nuevas validaciones.
-    public void add() {
-
+    public void add(Predicate<T> validator) {
+        validators.add(validator);
     }
 }

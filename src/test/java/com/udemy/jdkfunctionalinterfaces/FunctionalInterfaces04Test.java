@@ -2,8 +2,7 @@ package com.udemy.jdkfunctionalinterfaces;
 
 import org.junit.Test;
 
-import java.util.function.IntUnaryOperator;
-import java.util.function.LongBinaryOperator;
+import java.util.function.*;
 
 import static org.junit.Assert.*;
 
@@ -11,8 +10,7 @@ public class FunctionalInterfaces04Test {
 
     @Test
     public void shouldReturnSquareValue_whenGiveAnInteger() {
-        // TODO : Construir lambda. Dado un entero, retorne su valor cuadrado.
-        IntUnaryOperator square = null;
+        IntUnaryOperator square = num -> num * num;  // Dado un entero, retorna su valor al cuadrado.
 
         assertEquals(0, square.applyAsInt(0));
         assertEquals(1, square.applyAsInt(1));
@@ -22,40 +20,57 @@ public class FunctionalInterfaces04Test {
 
     @Test
     public void shouldReturnSmallestValue_whenGiveTwoLongNumbers() {
-        // TODO : Construir lambda. Dado dos números, retorne el de menor valor.
-        LongBinaryOperator smaller = null;
+        LongBinaryOperator smaller = (a, b) -> a < b ? a : b;  // Dado dos números, retorne el de menor valor.
+        // (a, b) -> a < b ? a : b
+        // (a, b) -> Math.min(a, b)
+        // Math::min
 
         assertEquals(-2, smaller.applyAsLong(-2, 3));
         assertEquals(5, smaller.applyAsLong(10, 5));
     }
 
     /*
-     * TODO:
-     *  - Implementar la declaración de la interfaz funcional.
-     *  - Construir el lambda.
-     *  - Construir pruebas unitarias.
      * Se utiliza de forma genérica Function, pero puede ser cualquier interfaz funcional del JDK.
-     *
      */
     @Test
     public void test_person() {
         Person personWithoutSecondSurname = new Person("David", "Perdomo", null);
-        Person personWithSecondSurname = new Person("Andrea", "Reyes", "Salgado");
+        Person personWithSecondSurname = new Person("Andrea", "Perdomo", "Salgado");
         Person unknownPerson = new Person("Albert", "Einstein", null);
 
-        // TODO : Construir lambda y 2 assert. Validar si la persona no tiene segundo apellido.
+        // Validar si la persona no tiene segundo apellido.
+        Predicate<Person> secondSurnameIsNullValidator = person -> person.getSecondSurname() == null;
 
-        // TODO : Construir lambda y 2 assert. Validar si 2 personas son parientes (tienen el mismo apellido).
+        assertTrue(secondSurnameIsNullValidator.test(personWithoutSecondSurname));
+        assertFalse(secondSurnameIsNullValidator.test(personWithSecondSurname));
 
-        // TODO : Construir lambda y 3 assert. Consumir los datos de una persona.
+        // Validar si 2 personas son parientes (tienen el mismo apellido).
+        BiPredicate<Person, Person> areRelativesValidator = (person, person2) -> person.getSurname().equals(person2.getSurname());
+
+        assertTrue(areRelativesValidator.test(personWithoutSecondSurname, personWithSecondSurname));
+        assertFalse(areRelativesValidator.test(personWithoutSecondSurname, unknownPerson));
+
+        // Consumir (de cualquier forma) los datos de una persona.
+        Consumer<Person> mask = person -> {
+            String tmp = person.getSurname();
+            person.setSurname(person.getSecondSurname());
+            person.setSecondSurname(person.getName());
+            person.setName(tmp);
+        };
+
+        mask.accept(personWithSecondSurname);
+
+        assertEquals("Perdomo", personWithSecondSurname.getName());
+        assertEquals("Salgado", personWithSecondSurname.getSurname());
+        assertEquals("Andrea", personWithSecondSurname.getSecondSurname());
     }
 
     @Test
     public void test_validator() {
         Validator<Person> validator = new Validator<Person>();
 
-        // TODO : Enviar como parámetro un predicado que valide si la persona tiene un primer apellido.
-        validator.add(/**/);
+        // Se envía como parámetro un predicado que valide si la persona tiene un primer apellido.
+        validator.add(person -> person.getSurname() != null);
 
         assertTrue(validator.validate(new Person("Carlos","Caicedo","Burgos")));
         assertFalse(validator.validate(new Person("Johana",null,"Barrios")));
