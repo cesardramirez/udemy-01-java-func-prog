@@ -1,6 +1,7 @@
 package com.udemy.stream;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -39,5 +40,16 @@ public class PersonUtil {
         return people.stream()
                 .map(Person::getFirstLastName)
                 .sorted(String::compareToIgnoreCase);  // (p1, p2) -> p1.compareToIgnoreCase(p2)
+    }
+
+    /**
+     * @return string con los nombres de las personas ordenados por tamaño de menor a mayor.
+     */
+    public String peopleConcatenateTheirNames() {
+        return people.stream()
+                .map(Person::getFirstName)
+                .sorted(Comparator.comparingInt(String::length))  // (p1, p2) -> p1.length() - p2.length()
+                .map(it -> "'" + it + "'")
+                .reduce("", (a, b) -> a + "\t" + b);
     }
 }

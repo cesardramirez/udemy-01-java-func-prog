@@ -44,4 +44,11 @@ public class Stream05Test {
         assertEquals("Llull", result.get(1));
         assertEquals("Smith", result.get(2));
     }
+
+    @Test
+    public void test_fourthFunction() {
+        String everybody = personUtil.peopleConcatenateTheirNames();
+
+        assertEquals("\t'John'\t'Pedro'\t'Antonia'", everybody);
+    }
 }
