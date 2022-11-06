@@ -20,20 +20,24 @@ public class PersonUtil {
      * @return stream de las personas que no tienen segundo apellido.
      */
     public Stream<Person> peopleWithoutSecondLastName() {
-        return null;
+        return people.stream()
+                .filter(it -> !it.getSecondLastName().isPresent());
     }
 
     /**
      * @return stream con los nombres de las personas.
      */
     public Stream<String> peopleWithTheirNames() {
-        return null;
+        return people.stream()
+                .map(Person::getFirstName);
     }
 
     /**
      * @return stream por el apellido ordenado asc, no se tiene en cuenta mayúsculas ni minúsculas.
      */
     public Stream<String> peopleWithTheirFirstLastNameSorted() {
-        return null;
+        return people.stream()
+                .map(Person::getFirstLastName)
+                .sorted(String::compareToIgnoreCase);  // (p1, p2) -> p1.compareToIgnoreCase(p2)
     }
 }
