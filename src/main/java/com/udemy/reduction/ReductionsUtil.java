@@ -1,7 +1,9 @@
 package com.udemy.reduction;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Utilizar streams con operaciones intermedias y una operación terminal (final) con una estructura mutable.
@@ -19,7 +21,14 @@ public class ReductionsUtil {
      * @return una colección de strings con el resultado final.
      */
     public Collection<String> getCollectionOfValuesWithUppercase(List<String> original) {
-        return null;
+        Collection<String> result = new ArrayList<>();
+
+        original.stream()
+                .filter(Objects::nonNull)  // it -> it != null
+                .map(String::toUpperCase)  // it -> it.toUpperCase()
+                .forEach(result::add);     // it -> result.add(it)
+
+        return result;
     }
 
     /**
@@ -35,6 +44,8 @@ public class ReductionsUtil {
     public int[] getPairAndOddNumbersFromAList(List<Integer> numbers) {
         int[] count = {0, 0};
 
-        return null;
+        numbers.forEach(num -> count[num % 2] += 1);
+
+        return count;
     }
 }
