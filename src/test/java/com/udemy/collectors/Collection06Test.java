@@ -1,4 +1,4 @@
-package com.udemy.collection;
+package com.udemy.collectors;
 
 import org.junit.Before;
 import org.junit.Test;

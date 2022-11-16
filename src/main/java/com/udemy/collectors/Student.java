@@ -1,4 +1,4 @@
-package com.udemy.collection;
+package com.udemy.collectors;
 
 public class Student {
 

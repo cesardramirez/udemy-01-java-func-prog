@@ -1,4 +1,4 @@
-package com.udemy.collection;
+package com.udemy.collectors;
 
 import java.util.List;
 import java.util.Map;
