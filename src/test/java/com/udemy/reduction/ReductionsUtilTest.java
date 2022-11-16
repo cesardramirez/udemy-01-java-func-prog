@@ -1,6 +1,5 @@
 package com.udemy.reduction;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
