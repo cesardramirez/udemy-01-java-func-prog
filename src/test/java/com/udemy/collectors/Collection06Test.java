@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class Collection06Test {
 
-    private StudentUtil studentUtil = new StudentUtil();
+    private final StudentUtil studentUtil = new StudentUtil();
     List<Student> students = new ArrayList<>();
 
     @Before
