@@ -24,7 +24,7 @@ public class Collection06Test {
 
         people.add(new Person("Luisa de", "Pico", Optional.of("Ducuara")));
         people.add(new Person("Brayam", "Castrillon", Optional.empty()));
-        people.add(new Person("Sandra", "Rojas", null));
+        people.add(new Person("Sandra", "Rojas", Optional.empty()));
     }
 
     @Test
@@ -55,7 +55,7 @@ public class Collection06Test {
     public void test_fourthFunction() {
         personUtil.removeNamesWithSpaces(people);
 
-        assertEquals(1, people.size());
+        assertEquals(2, people.size());
         assertEquals("Brayam", people.get(0).getName());
     }
 
@@ -63,7 +63,7 @@ public class Collection06Test {
     public void test_fifthFunction() {
         personUtil.convertValuesToUppercase(people);
 
-        assertEquals(2, people.size());
+        assertEquals(3, people.size());
         assertEquals("LUISA DE", people.get(0).getName());
         assertEquals("BRAYAM", people.get(1).getName());
         assertEquals("ROJAS", people.get(2).getSurname());
