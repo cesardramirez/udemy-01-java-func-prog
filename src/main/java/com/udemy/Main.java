@@ -1,11 +1,11 @@
 package com.udemy;
 
-import com.udemy.comparator.Comparator01;
+import com.udemy.comparator.ComparatorUtil;
 
 public class Main {
 
     public static void main(String[] args) {
         // Example 01
-        Comparator01 comparator01 = new Comparator01();
+        ComparatorUtil comparator01 = new ComparatorUtil();
     }
 }

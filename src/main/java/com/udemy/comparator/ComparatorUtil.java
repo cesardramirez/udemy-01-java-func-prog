@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Comparator01 {
+public class ComparatorUtil {
 
-    public Comparator01() {
+    public ComparatorUtil() {
         List<String> names = Arrays.asList("Juan", "Antonia", "Pedro");
 
         Comparator<String> lengthComparator = (o1, o2) -> o1.length() - o2.length();
